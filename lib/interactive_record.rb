@@ -54,19 +54,14 @@ class InteractiveRecord
   end
   
   #def self.find_by(hash)
-  #  query = hash.collect {|k, v| " #{k} = '#{v}'"}.join("AND ")
+  #  query = hash.collect {|k, v| " #{k} = '#{v}'"}.join(" AND")
   #  sql = "SELECT * FROM #{self.table_name} WHERE#{query}"
   #  DB[:conn].execute(sql)
   #end
   
   def self.find_by(hash)
-    query = hash.collect {|k, v| v.class == Fixnum ? " #{k} = #{v}" 
-      if v.class == Fixnum
-        "#{k} = #{v}"
-      else
-        "#{k} = '#{v}'"
-      end.join(", ")
-    end
+    query = hash.collect {|k, v| v.class == Fixnum ? " #{k} = #{v}" : " #{k} = '#{v}'"}.join(" AND")
+
     sql = "SELECT * FROM #{self.table_name} WHERE #{query}"
     DB[:conn].execute(sql)
   end
