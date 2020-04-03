@@ -66,6 +66,7 @@ class InteractiveRecord
       else
         "#{k} = '#{v}'"
       end.join(", ")
+    end
     sql = "SELECT * FROM #{self.table_name} WHERE #{query}"
     DB[:conn].execute(sql)
   end
