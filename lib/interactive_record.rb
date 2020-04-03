@@ -60,7 +60,7 @@ class InteractiveRecord
   #end
   
   def self.find_by(hash)
-    query = hash.collect do |k, v| 
+    query = hash.collect {|k, v|  
       if v.class == Fixnum
         "#{k} = #{v}"
       else
